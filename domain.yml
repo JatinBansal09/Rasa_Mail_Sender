@@ -1,0 +1,79 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - inform
+  - send_email
+
+entities:
+  - email
+
+slots:
+  email:
+    type: text
+    influence_conversation: true
+  subject:
+    type: text
+    influence_conversation: true
+  message:
+    type: text
+    influence_conversation: true
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_submit:
+    - text: "Email sent"
+
+  utter_ask_message:
+    - text: "What message would you like to send?"
+
+  utter_ask_subject:
+    - text: "What is the subject of the email?"
+    - text: "What subject would you like to provide to the mail?"
+
+  utter_ask_email:
+    - text: "Please provide the recipient's email addresses (comma-separated)."
+
+  utter_default_fallback:
+    - text: "I'm sorry, I didn't understand that. Could you please rephrase?"
+
+forms:
+  email_form:
+    email:
+    - type: from_entity
+      entity: email
+    subject:
+    - type: from_text
+    message:
+    - type: from_text
+
+actions:
+  - action_send_email
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
